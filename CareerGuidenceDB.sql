@@ -22,3 +22,23 @@ CREATE TABLE usersHasRoles(
     FOREIGN KEY(id_user) REFERENCES usersTable(id_user),
     FOREIGN KEY(id_role) REFERENCES rolesTable(id_roles)
 )
+
+CREATE table questions(
+    id      int(255)NOT NULL UNIQUE,
+    Name    varchar (30)NOT NULL UNIQUE,
+    Flag    bit(1)NOT NULL,
+    Primary key(id)
+);
+
+CREATE table specializes(
+    id      int(255)NOT NULL UNIQUE,
+    Name    varchar (30)NOT NULL UNIQUE,
+    Primary key(id)
+);
+
+CREATE table answers(
+    id_specializes  int(255)NOT NULL UNIQUE,
+    id_questions    int (255)NOT NULL,
+    Flag bit (1)NOT NULL ,
+    Primary key(id_specializes)
+);
