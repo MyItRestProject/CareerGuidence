@@ -65,3 +65,31 @@ create table interprise_has_work (
     foreign key (id_enterprise) references interprise(id),
     foreign key (id_woks) references works(id)
 );
+
+create table profession(
+    name            varchar(100)NOT NULL UNIQUE,
+    description     varchar(100)NOT NULL UNIQUE,
+    id_profession   int(100)NOT NULL UNIQUE,
+    primary key(id_profession) 
+);
+
+create table test (
+    id_user         varchar(100)NOT NULL UNIQUE,
+    id_test         int(10)NOT NULL UNIQUE,
+    id_profession   int(10)NOT NULL UNIQUE, 
+    primary key(id_test),
+    foreign key (id_user) references profession(id_proferssion) 
+);
+
+create table question(
+    id_name     varchar(100)NOT NULL UNIQUE,
+    flag        boolean UNIQUE,
+    primary key(id_name) 
+);
+
+create table test_has_question(
+    id_test         int(100)NOT NULL UNIQUE,
+    id_answer       int(100)NOT NULL UNIQUE,
+    foreign key (id_test) references test(id_test), 
+    foreign key (id_answer) references answer(id_answer)
+);
