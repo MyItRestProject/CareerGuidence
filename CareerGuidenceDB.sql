@@ -53,6 +53,8 @@ CREATE table answers(
 
 create table enterprises (
     id_enterprice int(10) NOT NULL UNIQUE,
+    login_enterprice varchar(15) NOT NULL UNIQUE,
+    password_enterprice varchar(50) NOT NULL,
     name_enterprice varchar(50) NOT NULL,
     phone_enterprice varchar(13) NOT NULL,
     geolocation_enterprice varchar(100) NOT NULL,
