@@ -12,16 +12,27 @@ CREATE TABLE users(
     password_user VARCHAR(15)
 );
 
+-- test has users
+-- id user 
+-- id test 
+-- id profession
+
+-- in dao user answers
+-- user has question
+-- id question
+-- id user
+-- flag
+
+
 CREATE TABLE roles(
     id_roles INT(10) UNIQUE NOT NULL PRIMARY KEY,
     name_roles VARCHAR(5)
 );
 
 CREATE table questions(
-    id_question int(10)NOT NULL UNIQUE,
+    id int(10)NOT NULL UNIQUE,
     name_question varchar (30)NOT NULL UNIQUE,
-    flag_question bit(1)NOT NULL,
-    primary key(id)
+	primary key(id)
 );
 
 create table professions(
@@ -38,18 +49,16 @@ CREATE TABLE users_has_roles(
     FOREIGN KEY(id_role) REFERENCES roles(id_roles)
 );
 
-CREATE table specializes(
-    id_specialize int(10)NOT NULL UNIQUE,
-    name_specialize varchar (30)NOT NULL UNIQUE,
-    primary key(id_specialize)
+CREATE table answers(
+	id int (10) Not Null Unique, 
+    id_profession int(10)NOT NULL UNIQUE,
+    id_question int (10)NOT NULL,
+    Primary key(id),
+    foreign key (id_question) references questions(id_question)
+
 );
 
-CREATE table answers(
-    id_specializes int(10)NOT NULL UNIQUE,
-    id_questions int (10)NOT NULL,
-    flag bit (1)NOT NULL ,
-    Primary key(id_specializes)
-);
+-- answers has professions	
 
 create table enterprises (
     id_enterprice int(10) NOT NULL UNIQUE,
@@ -62,31 +71,30 @@ create table enterprises (
 );
 
 create table tests (
-    id_test int(10)NOT NULL UNIQUE,
-    id_user int(10)NOT NULL UNIQUE,
-    id_profession int(10)NOT NULL UNIQUE, 
-    primary key(id_test),
-    foreign key (id_profession) references professions(id_profession)
+    id_test int(10)NOT NULL UNIQUE, 
+    name_test varchar(50) Not NUll,
+    primary key(id_test)
 );
 
 create table test_has_question(
     id_test int(10)NOT NULL UNIQUE,
-    id_answer int(10)NOT NULL UNIQUE,
+    id_question int(10)NOT NULL UNIQUE,
     foreign key (id_test) references tests(id_test), 
-    foreign key (id_answer) references answers(id_specializes)
+    foreign key (id_question) references answers(id_question)
 );
 
 create table works (
-    id_work int(10) NOT NULL unique,
+	id int (10) NOT NULL unique,
+    id_profession int(10) NOT NULL unique,
     name_work varchar(50) NOT NULL,
     position_work varchar(50) NOT NULL,
-    primary key(id_work),
-    foreign key (id_work) references professions(id_profession)
+    primary key(id),
+    foreign key (id_profession) references professions(id_profession)
 );
 
 create table enterprises_has_work (
     id_enterprise int(10) NOT NULL UNIQUE,
-    id_woks int(10) NOT NULL UNIQUE,
+    id_works int(10) NOT NULL UNIQUE,
     foreign key (id_enterprise) references enterprises(id_enterprice),
-    foreign key (id_woks) references works(id_work)
+    foreign key (id_works) references works(id)
 );
