@@ -12,16 +12,23 @@ CREATE TABLE users(
     password_user VARCHAR(15)
 );
 
--- test has users
--- id user 
--- id test 
--- id profession
+create table test_has_users (
+	id_user int(10) NOT NULL UNIQUE,
+	id_test int(10)NOT NULL UNIQUE,
+	id_profession int(10)NOT NULL UNIQUE,
+	foreign key (id_user) references users(id_user),
+	foreign key (id_test) references tests(id_test),
+	foreign key (id_profession) references professions(id_profession)
+);
 
 -- in dao user answers
--- user has question
--- id question
--- id user
--- flag
+create table user_has_questions(
+	id_user int(10) NOT NULL UNIQUE,
+	id_question int(10) NOT NULL UNIQUE,
+	flag boolean NOT NULL,
+	Foreign key(id_user) references users(id),
+	Foreign key(id_question) references question(id)
+); 
 
 
 CREATE TABLE roles(
@@ -58,7 +65,12 @@ CREATE table answers(
 
 );
 
--- answers has professions	
+create table answer_has_profession(
+	id_answer int(100)NOT NULL UNIQUE,
+	id_profession int(100)NOT NULL UNIQUE,
+	foreign key (id_test) references test(id_test), 
+	foreign key (id_profession) references answer(id_profession)
+);
 
 create table enterprises (
     id_enterprice int(10) NOT NULL UNIQUE,
