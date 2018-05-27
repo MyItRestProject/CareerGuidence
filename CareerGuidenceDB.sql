@@ -10,24 +10,6 @@ CREATE TABLE users(
     email_user VARCHAR(30),
     login_user VARCHAR(15),
     password_user VARCHAR(15)
-);
-
-create table test_has_users (
-	id_user int(10) NOT NULL UNIQUE,
-	id_test int(10)NOT NULL UNIQUE,
-	id_profession int(10)NOT NULL UNIQUE,
-	foreign key (id_user) references users(id_user),
-	foreign key (id_test) references tests(id_test),
-	foreign key (id_profession) references professions(id_profession)
-);
-
--- in dao user answers
-create table user_has_questions(
-	id_user int(10) NOT NULL UNIQUE,
-	id_question int(10) NOT NULL UNIQUE,
-	flag boolean NOT NULL,
-	Foreign key(id_user) references users(id),
-	Foreign key(id_question) references question(id)
 ); 
 
 
@@ -56,22 +38,6 @@ CREATE TABLE users_has_roles(
     FOREIGN KEY(id_role) REFERENCES roles(id_roles)
 );
 
-CREATE table answers(
-	id int (10) Not Null Unique, 
-    id_profession int(10)NOT NULL UNIQUE,
-    id_question int (10)NOT NULL,
-    Primary key(id),
-    foreign key (id_question) references questions(id_question)
-
-);
-
-create table answer_has_profession(
-	id_answer int(100)NOT NULL UNIQUE,
-	id_profession int(100)NOT NULL UNIQUE,
-	foreign key (id_test) references test(id_test), 
-	foreign key (id_profession) references answer(id_profession)
-);
-
 create table enterprises (
     id_enterprice int(10) NOT NULL UNIQUE,
     login_enterprice varchar(15) NOT NULL UNIQUE,
@@ -88,13 +54,6 @@ create table tests (
     primary key(id_test)
 );
 
-create table test_has_question(
-    id_test int(10)NOT NULL UNIQUE,
-    id_question int(10)NOT NULL UNIQUE,
-    foreign key (id_test) references tests(id_test), 
-    foreign key (id_question) references answers(id_question)
-);
-
 create table works (
 	id int (10) NOT NULL unique,
     id_profession int(10) NOT NULL unique,
@@ -103,6 +62,14 @@ create table works (
     primary key(id),
     foreign key (id_profession) references professions(id_profession)
 );
+CREATE table answers(
+	id int (10) Not Null Unique, 
+    id_profession int(10)NOT NULL UNIQUE,
+    id_question int (10)NOT NULL,
+    Primary key(id),
+    foreign key (id_question) references questions(id)
+
+);
 
 create table enterprises_has_work (
     id_enterprise int(10) NOT NULL UNIQUE,
@@ -110,3 +77,27 @@ create table enterprises_has_work (
     foreign key (id_enterprise) references enterprises(id_enterprice),
     foreign key (id_works) references works(id)
 );
+create table test_has_users (
+	id_user int(10) NOT NULL UNIQUE,
+	id_test int(10)NOT NULL UNIQUE,
+	id_profession int(10)NOT NULL UNIQUE,
+	foreign key (id_user) references users(id_user),
+	foreign key (id_test) references tests(id_test),
+	foreign key (id_profession) references professions(id_profession)
+);
+
+-- in dao user answers
+create table user_has_questions(
+	id_user int(10) NOT NULL UNIQUE,
+	id_question int(10) NOT NULL UNIQUE,
+	flag boolean NOT NULL,
+	Foreign key(id_user) references users(id_user),
+	Foreign key(id_question) references questions(id)
+);
+create table test_has_question(
+    id_test int(10)NOT NULL UNIQUE,
+    id_question int(10)NOT NULL UNIQUE,
+    foreign key (id_test) references tests(id_test), 
+    foreign key (id_question) references answers(id_question)
+);
+
