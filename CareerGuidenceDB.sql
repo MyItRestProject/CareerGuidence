@@ -20,14 +20,15 @@ CREATE TABLE roles(
 
 CREATE table questions(
     id int(10)NOT NULL UNIQUE,
-    name_question varchar (30)NOT NULL UNIQUE,
+    name_question varchar (255)NOT NULL,
+    points int(10), 
 	primary key(id)
 );
 
 create table professions(
-    id_profession int(10)NOT NULL UNIQUE,
-    name_profession varchar(20)NOT NULL UNIQUE,
-    description_profession varchar(255)NOT NULL UNIQUE,
+    id_profession int(10)NOT NULL UNIQUE ,
+    name_profession varchar(255),
+    description_profession varchar(255),
     primary key(id_profession) 
 );
 
@@ -55,10 +56,10 @@ create table tests (
 );
 
 create table works (
-	id int (10) NOT NULL unique,
+	id int (10) NOT NULL unique ,
     id_profession int(10) NOT NULL unique,
-    name_work varchar(50) NOT NULL,
-    position_work varchar(50) NOT NULL,
+    name_work varchar(80),
+    position_work varchar(80),
     primary key(id),
     foreign key (id_profession) references professions(id_profession)
 );
@@ -72,7 +73,7 @@ CREATE table answers(
 );
 
 create table enterprises_has_work (
-    id_enterprise int(10) NOT NULL UNIQUE,
+    id_enterprise int(10) NOT NULL UNIQUE ,
     id_works int(10) NOT NULL UNIQUE,
     foreign key (id_enterprise) references enterprises(id_enterprice),
     foreign key (id_works) references works(id)
